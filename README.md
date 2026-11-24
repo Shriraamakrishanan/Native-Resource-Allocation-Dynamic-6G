@@ -13,17 +13,30 @@
  
 A 6G network splits one physical radio resource pool into virtual **slices**: eMBB (high throughput), URLLC (very low latency) and mMTC (massive IoT). Static splits waste capacity when one slice is idle and another is starved. This project trains a **PPO reinforcement-learning agent** to reallocate bandwidth across the three slices every step, and benchmarks it against a proportional-fair heuristic on **SLA violations** and **bandwidth utilization**.
  
+
 ## Architecture
- 
+
 ```mermaid
 flowchart LR
-    A["Traffic Generator<br/>bursty demand per slice"] --> B["Slicing Simulator<br/>queues + latency model"]
-    B -->|"state: demand, queue, allocation"| C["Gymnasium Wrapper<br/>reset / step / reward"]
-    C --> D["PPO Agent<br/>Stable-Baselines3"]
-    D -->|"action: bandwidth shares"| B
-    E["Heuristic Baseline<br/>proportional-fair + URLLC boost"] -->|"action"| B
-    C --> F["Evaluation<br/>SLA violations, utilization, latency"]
+    A["Traffic Generator<br/>Bursty demand per slice<br/>eMBB | URLLC | mMTC"]
+    B["6G Slicing Simulator<br/>Queues + Latency Model"]
+    C["Gymnasium Wrapper<br/>State + Action + Reward"]
+    D["PPO Agent<br/>Stable-Baselines3 + PyTorch"]
+    E["Heuristic Baseline<br/>Proportional Fair + URLLC Boost"]
+    F["Performance Evaluation<br/>SLA Violations + Utilization + Latency"]
+    G["Results and Visualization<br/>Plots + Benchmark Tables"]
+
+    A --> B
+    B --> C
+    C -->|"State"| D
+    D -->|"Bandwidth Actions"| B
+    E -->|"Baseline Actions"| B
+    C --> F
+    F --> G
 ```
+
+
+
  
 **Research workflow (pseudo code)**
  
