@@ -47,10 +47,21 @@ FOR each experiment IN [reward_shaping, ppo_hyperparams, traffic_generalization,
 ## Setup
  
 ```bash
-git clone https://github.com/<your-username>/6g-network-slicing-rl.git
-cd 6g-network-slicing-rl
-python3 -m venv .venv && source .venv/bin/activate
-pip install gymnasium "stable-baselines3[extra]" numpy matplotlib pandas
+git clone https://github.com/Shriraamakrishanan/Native-Resource-Allocation-Dynamic-6G.git
+cd Native-Resource-Allocation-Dynamic-6G
+python -m venv .venv
+```
+
+Activate the virtual environment, then install the project dependencies:
+
+```bash
+# macOS / Linux
+source .venv/bin/activate
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+python -m pip install -r requirements.txt
 ```
  
 ## Usage
