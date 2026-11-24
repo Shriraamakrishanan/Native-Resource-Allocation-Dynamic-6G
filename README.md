@@ -67,11 +67,20 @@ python -m pip install -r requirements.txt
 ## Usage
  
 ```bash
-python train.py       # trains PPO (200k steps), saves ppo_slicing_agent.zip
-python evaluate.py    # RL vs heuristic benchmark, prints and saves results
+python demo_6g_slicing.py
 ```
  
-Files: `slicing_env.py` (environment), `train.py`, `baseline_heuristic.py`, `evaluate.py`.
+The demo trains a PPO agent and saves its visualization as
+`6g_slicing_demo_results.png`. The checked-in `docs/reward_curve.png` and
+`logs/sample.monitor.csv` are sample artifacts; the monitor data is synthetic,
+not a record of an actual training run.
+
+The `ns-3-dev` and `ns3-mmwave` directories are Git submodules for the upstream
+simulation projects. Initialize them after cloning with:
+
+```bash
+git submodule update --init --recursive
+```
  
 ## Results
  

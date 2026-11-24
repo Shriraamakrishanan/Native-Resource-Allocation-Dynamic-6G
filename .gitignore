@@ -1,0 +1,4 @@
+.venv/
+6g-slicing-env/
+__pycache__/
+*.py[cod]
