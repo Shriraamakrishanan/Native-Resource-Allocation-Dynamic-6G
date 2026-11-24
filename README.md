@@ -16,13 +16,24 @@ A 6G network splits one physical radio resource pool into virtual **slices**: eM
 
 ## Architecture
 ```mermaid
-flowchart LR
-    A["Traffic Generator<br/>bursty demand per slice"] --> B["Slicing Simulator<br/>queues + latency model"]
-    B -->|"state: demand, queue, allocation"| C["Gymnasium Wrapper<br/>reset / step / reward"]
-    C --> D["PPO Agent<br/>Stable-Baselines3"]
-    D -->|"action: bandwidth shares"| B
-    E["Heuristic Baseline<br/>proportional-fair + URLLC boost"] -->|"action"| B
-    C --> F["Evaluation<br/>SLA violations, utilization, latency"]
+flowchart TD
+    A["Traffic Generator<br/>Bursty demand per slice<br/>eMBB | URLLC | mMTC"]
+    B["6G Slicing Simulator<br/>Queues, latency and bandwidth"]
+    C["Gymnasium Environment<br/>State, action and reward"]
+    D["PPO Agent<br/>Stable-Baselines3 + PyTorch"]
+    E["Heuristic Baseline<br/>Proportional Fair + URLLC Boost"]
+    F["Dynamic Bandwidth Allocation"]
+    G["Performance Evaluation<br/>SLA violations, utilization, latency"]
+    H["Results and Visualization<br/>Plots, tables and comparison"]
+
+    A --> B
+    B --> C
+    C -->|"State"| D
+    D -->|"RL actions"| F
+    E -->|"Baseline actions"| F
+    F --> B
+    C --> G
+    G --> H
 ```
 
 
