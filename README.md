@@ -71,8 +71,8 @@ Mean over [20] evaluation episodes of 200 steps, seed [__]. Replace the placehol
 | PPO agent | [x.xx] | [xx%] | [x.xx] |
 | Proportional-fair heuristic | [x.xx] | [xx%] | [x.xx] |
  
-![Training reward curve](docs/reward_curve.png)
- 
+<img width="1120" height="631" alt="image" src="https://github.com/user-attachments/assets/b5bf20b3-c812-4113-931c-c50e6de4f39e" />
+
 ## Reflection
  
 The biggest hurdle was getting PPO to learn anything beyond an equal split. Early training showed a flat reward curve. Logging each reward component separately showed the SLA-violation penalty, which grows into the hundreds during bursts, swamped the utilization reward capped at 5, so the agent had no useful gradient. I normalized both terms to comparable magnitudes, added queue length and current allocation to the observation so the agent could see the effect of its last action, and seeded the environment's random generator so runs were repeatable. After this, the agent began shifting bandwidth toward URLLC during bursts and violations fell from [X] to [Y] per episode against the heuristic. The lesson: in reinforcement learning, debugging the reward signal matters more than tuning the algorithm. *(Edit this to match what actually happened in your runs.)*
